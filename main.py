@@ -12,7 +12,7 @@ from gensim.models import Word2Vec
 
 article_dataframe = pd.DataFrame()
 url_extension = ['.cms', '.html']
-biased_word = ["oldpeople", "eliminated", "stop", "insult", "extorted", "burning", "flaunt", "bewitched", "blasts", "unbalanced"]
+biased_word = ["old", "eliminated", "flaunt", "blasts", "unbalanced", "sympathy", "weak", "worst", "insulted", "tumbles"]
 gensim_model = 'word2vec.model'
 
 
@@ -117,9 +117,10 @@ def pre_process_text(title_data):
 
 def tokenize(sentence):
     tokens = []
-    for s in sentence.split():
-        token = nltk.word_tokenize(s)
-        tokens.append(token)
+    for index, row in sentence.iteritems():
+        for s in row.split():
+            token = nltk.word_tokenize(s)
+            tokens.append(token)
     return tokens
 
 
@@ -162,8 +163,8 @@ if __name__ == '__main__':
     ## 1. Article collection from the URL
      #article_collection()
     ## 2.  Download the article
-    download_article()
+    # download_article()
     ## 3. Word embeddings to calculate the 100 most similar words to each of those words
-    #word_embedding()
+    word_embedding()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
